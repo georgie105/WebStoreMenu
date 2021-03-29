@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block title %}
+<title>WebStoreMenu: Update</title>
+{% endblock %} {% block body %}
+<header id="banner">
+  <h1 id="pagetitle">Update Item</h1>
+  <nav id="links">
+    <a href="/">View items</a>
+    <a href="/add">Add item</a>
+    <a href="/manage">Manage items</a>
+  </nav>
+</header>
+<main>
+  <section id="formwrapper">
+    <form action="/update/{{ item.id }}" method="POST">
+      <div class="divider">
+        <input
+          type="text"
+          name="name"
+          placeholder="Item Name"
+          value="{{ item.name }}"
+        />
+      </div>
+      <div class="divider">
+        <input
+          type="text"
+          name="price"
+          placeholder="Item price"
+          value="{{ item.price}}"
+        />
+      </div>
+
+      <div class="divider">
+        <button type="submit">Update Item</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

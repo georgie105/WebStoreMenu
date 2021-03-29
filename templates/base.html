@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="{{url_for('static', filename='css/style.css')}}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
+    {% block title %} {% endblock %}
   </head>
   <body>
     {% block body %} {% endblock %}
+    <footer>
+      <p>Copyright &copy 2021</p>
+    </footer>
   </body>
 </html>

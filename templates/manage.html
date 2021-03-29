@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}
+<title>WebStoreMenu: Manage</title>
+{% endblock %} {% block body %}
+<header id="banner">
+  <h1 id="pagetitle">Manage Items</h1>
+  <nav id="links">
+    <a href="/">Home</a>
+    <a href="/add">Add Items</a>
+  </nav>
+</header>
+<main id="table-wrapper">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Date added</th>
+      <th>Actions</th>
+    </tr>
+    {% if items|length < 1 %}
+    <h1>No items have been added yet!</h1>
+    {% else %} {% for item in items %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name}}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.date_created.date()}}</td>
+      <td>
+        <a href="/update/{{ item.id }}">Edit</a>
+        <a href="/delete/{{ item.id }}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %} {% endif %}
+  </table>
+</main>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %}
+<title>WebStoreMenu: Add</title>
+{% endblock %} {% block body %}
+<header id="banner">
+  <h1 id="pagetitle">Add New Item</h1>
+  <nav id="links">
+    <a href="/">View items</a>
+    <a href="/manage">Manage items</a>
+  </nav>
+</header>
+<main>
+  <section id="formwrapper">
+    <form action="/add" method="POST" enctype="multipart/form-data">
+      <div class="divider">
+        <input type="text" name="name" placeholder="Item Name" />
+      </div>
+      <div class="divider">
+        <input type="text" name="price" placeholder="Item price" />
+      </div>
+      <div class="divider">
+        <label for="file">Image of the item</label>
+        <input type="file" name="image" />
+      </div>
+      <div class="divider">
+        <button type="submit">Add Item</button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

@@ -1,3 +1,31 @@
-{% extends 'base.html' %} {% block body %}
-<h1>Hello world</h1>
+{% extends 'base.html' %} {% block title %}
+<title>WebStoreMenu: Home</title>
+{% endblock %} {% block body %}
+<header id="banner">
+  <h1 id="pagetitle">WebStoreMenu</h1>
+  <nav id="links">
+    <a href="/add">Add item</a>
+    <a href="/manage">Manage items</a>
+  </nav>
+</header>
+<main>
+  <section id="cards">
+    {% if items|length < 1 %}
+    <h1>No Items have been added yet.</h1>
+    {% else%} {% for item in items %}
+    <div class="card">
+      <div class="cardImage">
+        <img
+          src="{{ url_for('static', filename='uploads/'+item.image) }}"
+          alt="{{ item.image }}"
+        />
+      </div>
+      <div class="cardDetails">
+        <div class="cardTitle">{{item.name}}</div>
+        <span class="cardBadge">${{item.price}}</span>
+      </div>
+    </div>
+    {% endfor %} {% endif %}
+  </section>
+</main>
 {% endblock %}
