@@ -4,11 +4,16 @@
 <header id="banner">
   <h1 id="pagetitle">Manage Items</h1>
   <nav id="links">
-    <a href="/">Home</a>
+    <a href="/">View Items</a>
     <a href="/add">Add Items</a>
   </nav>
 </header>
 <main id="table-wrapper">
+  {% if items|length < 1 %}
+  <center>
+    <h1>No items have been added yet!</h1>
+  </center>
+  {% else %}
   <table>
     <tr>
       <th>Id</th>
@@ -17,9 +22,7 @@
       <th>Date added</th>
       <th>Actions</th>
     </tr>
-    {% if items|length < 1 %}
-    <h1>No items have been added yet!</h1>
-    {% else %} {% for item in items %}
+    {% for item in items %}
     <tr>
       <td>{{ item.id }}</td>
       <td>{{ item.name}}</td>
@@ -30,7 +33,8 @@
         <a href="/delete/{{ item.id }}">Delete</a>
       </td>
     </tr>
-    {% endfor %} {% endif %}
+    {% endfor %}
   </table>
+  {% endif %}
 </main>
 {% endblock %}

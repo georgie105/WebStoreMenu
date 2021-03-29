@@ -58,10 +58,8 @@ def add():
 @app.route('/delete/<int:id>')
 def delete(id):
     item_to_delete = Item.query.get_or_404(id)
-    image_to_delete = './static/uploads/'+item_to_delete.image
     try:
         db.session.delete(item_to_delete)
-        os.remove(image_to_delete)
         db.session.commit()
         return redirect('/')
     except:
@@ -73,12 +71,13 @@ def update(id):
     item = Item.query.get_or_404(id)
     
     if request.method == 'POST':
+        
         item.name = request.form['name']
         item.price = request.form['price']
-
+        
         try:
             db.session.commit()
-            return redirect('/')
+            return redirect('/manage')
         except:
             return 'There was an issue updating your task'
     else:
