@@ -58,10 +58,14 @@ def add():
 @app.route('/delete/<int:id>')
 def delete(id):
     item_to_delete = Item.query.get_or_404(id)
+    image_to_delete = item_to_delete.image
+    image_to_delete_path = f'./static/uploads/{image_to_delete}'
+    if os.path.isfile(image_to_delete_path):
+        os.remove(image_to_delete_path)
     try:
         db.session.delete(item_to_delete)
         db.session.commit()
-        return redirect('/')
+        return redirect('/manage')
     except:
         return 'There was a problem deleting that task'
 
@@ -77,7 +81,7 @@ def update(id):
         
         try:
             db.session.commit()
-            return redirect('/manage')
+            return redirect('/')
         except:
             return 'There was an issue updating your task'
     else:
