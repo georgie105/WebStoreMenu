@@ -6,6 +6,17 @@ from werkzeug.utils import redirect, secure_filename
 
 app = Flask(__name__) # Initialize flask app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///item.db' # Connect to SQLite Database
+
+"""
+We are always faced with this warning. 
+
+FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+
+solving it will be 
+"""
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+
 db = SQLAlchemy(app) # Initialize Database to db variable
 
 # Create Database model
@@ -114,6 +125,29 @@ def update(id):
     else:
         return render_template('update.html', item=item)
 
+
+"""
+ This is a shell context processor
+ It enables you to interact with your application in a very goo manner via ` flask shell `
+
+ It works like this,
+ you have to 
+
+ ` export FLASK_APP=app.py`
+
+ ` flask shell`
+
+Creating the db will be as simple as 
+>>> db.create_all() 
+>>> 
+"""
+@app.shell_context_processor
+def make_shell_context():
+    return {
+        'app':app,
+        'db':db,
+        'Item':Item
+    }
 
 if __name__ == '__name__':
     app.run(debug=True)
